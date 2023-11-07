@@ -12,7 +12,7 @@ namespace TextBasedRPG_Map_WillB
     {
         static char[,] map = new char[,] // dimensions defined by following data:
     {
-        {'^','^','^','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`'},//29 by 11
+        {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','W','X','!','!','!','!','!','`','`'},//29 by 11
         {'^','^','`','`','`','`','*','*','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','~','~','~','`','`','`'},
         {'^','^','`','`','`','*','*','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','~','~','~','`','`','`','`','`'},
         {'^','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`','`'},
@@ -34,8 +34,7 @@ namespace TextBasedRPG_Map_WillB
         // ` = grass
         // ~ = water
         // * = trees
-        static int i = 1;
-
+        static int i = 0;
         static void Main(string[] args)
         {
             Console.WriteLine("--------------------------------------");
@@ -43,28 +42,34 @@ namespace TextBasedRPG_Map_WillB
                             "\n|Welcome to Will's Text Based RPG Map.|" + "\n" +
                               "|Press any key to begin:              | ");
             Console.WriteLine("---------------------------------------");
+            Console.ReadKey();
+            //map[0, 0] = 'A';
             DisplayMap();
-            
+
         }
         static void DisplayMap()
         {
-            int width = 11;
-            int height = 29;
-            for(int x = 0; x <= width; x++)
+            int width = 29;
+            int height = 11;
+            int current = 0;
+            int borderwidth = map.GetLength(1) + 2;
+            int borderheight = map.GetLength(0) + 2;
+            foreach(char MapCell in map)
             {
-                for (int y = 0; y <= height; y++)
+                Console.Write(MapCell);
+                
+                if(current >= width)
                 {
-                    //Console.WriteLine(y);     
-                    Console.Write(map[x, y]);
-                    if(x == i)
-                    {
-                        Console.Write("\n");
-                        i++;
-                    }
+                    Console.Write("\n");
+                    current = 0;
+                }
+                else
+                {
+                    current++;
                 }
             }
-
             Console.ReadLine();
-        }
+        }  
     }
 }
+
